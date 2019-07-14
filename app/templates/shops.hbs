@@ -1,0 +1,34 @@
+<div class="container">{{this.itemService.shope}}
+    <ShopTable
+      @shops={{this.shopService.shops}}
+      @openModal={{this.openModal}}
+      @remove={{this.remove}}
+    />
+  <f class="btn btn-primary btn-nueva" onClick={{ action this.openModal '' '' }}><b>+</b> Add </f>
+</div>
+
+{{#if isShowingModal}}
+    {{#modal-dialog
+      onClose=(action closeModal false)
+      translucentOverlay=true
+    }}
+      <div class="flex-container">
+        {{#if selectedId}}
+          <h1>edit SHOP!</h1>
+        {{else}}
+          <h1>ADD SHOP!</h1>
+        {{/if}}
+        <input value={{this.newShop}} onchange={{action (mut this.newShop) value="target.value"}} type="text"
+               placeholder="Filename including extension...">
+        <div class="popup-footer">
+          <f class="marginRight btn btn-primary btn-nueva" onclick={{action  closeModal false}}> Close </f>
+          {{#if selectedId}}
+            <f class="btn btn-primary btn-nueva" onclick={{action editShop this.newShop this.selectedId}}> Edit </f>
+          {{else}}
+            <f class="btn btn-primary btn-nueva" onclick={{action  addShop this.newShop}}> Add </f>
+          {{/if}}
+        </div>
+      </div>
+    {{/modal-dialog}}
+{{/if}}
+{{outlet}}

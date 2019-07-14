@@ -1,0 +1,32 @@
+<div class="container">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">NAME</th>
+      <th scope="col">QTY</th>
+      <th scope="col">PRICE</th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each @items as |item|}}
+      <tr>
+        <td>{{item.name}}</td>
+        <td>{{item.qty}}</td>
+        <td>{{item.price}}</td>
+        <td>
+          <f class="btn btn-default btn-outline-dark" onClick={{ action this.openModal item}}>
+            EDit
+          </f>
+          <f class="btn btn-default btn-outline-dark" onClick={{ action this.remove item.id}}>
+            Delete<
+          </f>
+        </td>
+      </tr>
+    {{/each}}
+    </tbody>
+  </table>
+
+</div>
+
+{{yield}}

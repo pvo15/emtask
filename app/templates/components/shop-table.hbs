@@ -1,0 +1,27 @@
+<div class="container">
+  <table class="table   table-hover">
+    <thead>
+    <tr>
+      <th>name</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+      {{#each @shops as |shop|}}
+              <tr>
+                <td>
+                   <LinkTo @route="items" @model={{shop.id}}>
+                    {{shop.name}}
+                    </LinkTo>
+                </td>
+                <td>
+                  <f class="btn btn-default btn-outline-dark" onClick={{ action this.openModal shop.name shop.id}}>
+                      EDit
+                  </f>
+                  <f class="btn btn-default btn-outline-dark" onClick={{ action this.remove shop.id}}>Delete</f> </td>
+
+              </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

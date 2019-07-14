@@ -1,0 +1,42 @@
+<div class="container">
+  <ItemTable
+      @items={{this.items}}
+      @openModal={{this.openModal}}
+      @remove={{this.remove}}
+      @totalPrice={{this.totalPrice}}
+  />
+  <f class="btn btn-primary btn-nueva" onClick={{ action this.openModal '' '' }}><b>+</b> Add </f>
+</div>
+
+{{#if isShowingModal}}
+  {{#modal-dialog
+    onClose=(action closeModal false)
+    translucentOverlay=true
+  }}
+    <div class="flex-container">
+      {{#if selectedId}}
+        <h1>edit Item!</h1>
+      {{else}}
+        <h1>ADD Item!</h1>
+      {{/if}}
+      <lable>name</lable>
+      <input value={{this.name}} onchange={{action (mut this.name) value="target.value"}} type="text"
+             placeholder="Filename including extension...">
+      <lable>QTY</lable>
+      <input value={{this.qty}} onchange={{action (mut this.qty) value="target.value"}} type="number"
+             placeholder="Filename including extension...">
+      <lable>Price</lable>
+      <input value={{this.price}} onchange={{action (mut this.price) value="target.value"}} type="number"
+             placeholder="Filename including extension...">
+      <div class="popup-footer">
+        <f class="marginRight btn btn-primary btn-nueva" onclick={{action  closeModal false}}> Close </f>
+        {{#if selectedId}}
+          <f class="btn btn-primary btn-nueva" onclick={{action editItem this.selectedId this.name this.qty this.price}}> Edit </f>
+        {{else}}
+          <f class="btn btn-primary btn-nueva" onclick={{action  addItem this.name this.qty this.price  }}> Add </f>
+        {{/if}}
+      </div>
+    </div>
+  {{/modal-dialog}}
+{{/if}}
+{{outlet}}
